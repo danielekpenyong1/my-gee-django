@@ -1,6 +1,6 @@
 from django.urls import path
 
-from . import views
+from .import views
 
 urlpatterns = [
 	#Leave as empty string for base url
@@ -11,8 +11,10 @@ urlpatterns = [
 	path('update_item/', views.updateItem, name="update_item"),
 	path('process_order/', views.processOrder, name="process_order"),
 
-	path('signup', views.register, name="signup"), 
-	path('login', views.register, name="login"), 
+	path('signup/', views.register, name="signup"),
+
+	path('login/', views.login_user, name="login")
+
 	
 
 

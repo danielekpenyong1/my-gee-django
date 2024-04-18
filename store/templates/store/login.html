@@ -20,7 +20,7 @@
 			width: 350px;
 			margin-top: auto;
 			margin-bottom: auto;
-			background: #74cfbf;
+			background: red;
 			position: relative;
 			display: flex;
 			justify-content: center;
@@ -44,7 +44,7 @@
 
 		.login_btn {
 			width: 100%;
-			background: #33ccff !important;
+			background: darkred !important;
 			color: white !important;
 		}
 		.login_btn:focus {
@@ -55,7 +55,7 @@
 			padding: 0 2rem;
 		}
 		.input-group-text {
-			background: #f7ba5b !important;
+			background: darkred !important;
 			color: white !important;
 			border: 0 !important;
 			border-radius: 0.25rem 0 0 0.25rem !important;
@@ -71,6 +71,11 @@
 			color: #fff;
 			padding: 10px;
 			margin-top: 10px;
+
+		}
+
+		span{
+			color: white;
 		}
 	</style>
 
@@ -86,6 +91,7 @@
 				</div>
 				<div class="d-flex justify-content-center form_container">
 					<form method="POST" action="">
+						{% csrf_token %}
 						<div class="input-group mb-3">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -105,10 +111,12 @@
 					</form>
 
 				</div>
-		
+		        {% for message in messages %}
+				       <p id="messages">{{message}}</p>
+					   {% endfor %}
 				<div class="mt-4">
 					<div class="d-flex justify-content-center links">
-						Don't have an account? <a href="{% url 'signup' %}" class="ml-2">Sign Up</a>
+						<span>Don't have an account?</span> <a href="{% url 'signup' %}" class="ml-2">Sign Up</a>
 					</div>
 			
 				</div>

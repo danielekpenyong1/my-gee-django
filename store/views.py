@@ -7,6 +7,8 @@ from .utils import cookieCart, cartData, guestOrder
 
 from .forms import NewUserForm
 
+from django.contrib.auth import authenticate, login, logout
+
 
 
 
@@ -113,8 +115,31 @@ def register(request):
 	if request.method == "POST":
 		form = NewUserForm(request.POST)
 		if form.is_valid():
-			user = form.save()
-			login(request, user)
-			return redirect("main:homepage")
+			form.save()
+		
+			return redirect("login")
 	form = NewUserForm
 	return render (request=request, template_name="store/signup.html", context={"form":form})
+
+def login_user(request):
+	if request.method == 'POST':
+		username = request.POST.get('username')
+		password = request.POST.get('password')
+		user = authenticate(request, username=username, password=password)
+
+		if user is not None:
+			login(request, user)
+			return redirect('store')
+		else:
+			messages.info(request, 'username OR password is incorrect')
+		
+	   
+
+	  
+
+	   
+
+
+	context = {}
+
+	return render(request, "store/login.html", context)
